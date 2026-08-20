@@ -3,6 +3,10 @@
 <img src="https://opengraph.githubassets.com/dracory/social" />
 
 [![Tests Status](https://github.com/dracory/social/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/dracory/social/actions/workflows/tests.yml)
+
+## Preview
+
+![Social Share Widget Preview](docs/images/widget-preview.png)
 [![Go Report Card](https://goreportcard.com/badge/github.com/dracory/social)](https://goreportcard.com/report/github.com/dracory/social)
 [![PkgGoDev](https://pkg.go.dev/badge/github.com/dracory/social)](https://pkg.go.dev/github.com/dracory/social)
 
@@ -227,6 +231,16 @@ Icon library types:
 ## Dependencies
 
 This package has no external dependencies. It uses only the Go standard library (`net/url`, `sort`, `strings`).
+
+## Example
+
+An example web server demonstration is provided in the [`examples/`](./examples) directory. To run it locally:
+
+```bash
+go run ./examples/main.go
+```
+
+Then navigate to `http://localhost:8080` in your web browser to view the interactive widget previews.
 
 ## Testing
 
