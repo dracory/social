@@ -133,6 +133,25 @@ func TestWidget_SortStrategy(t *testing.T) {
 		t.Error("With SortStrategyManual, platforms should appear in Platforms order")
 	}
 
+	// Test popularity sorting
+	htmlPopular := shareLinks.Widget(WidgetOptions{
+		Platforms:    []string{PlatformPinterest, PlatformFacebook, PlatformTwitter},
+		SortStrategy: SortStrategyPopularity,
+	})
+
+	facebookPosPop := strings.Index(htmlPopular, "id=\"social-facebook\"")
+	twitterPosPop := strings.Index(htmlPopular, "id=\"social-twitter\"")
+	pinterestPosPop := strings.Index(htmlPopular, "id=\"social-pinterest\"")
+
+	if facebookPosPop == -1 || twitterPosPop == -1 || pinterestPosPop == -1 {
+		t.Error("HTML should contain all social links")
+	}
+
+	// By popularity: Facebook < Reddit < WhatsApp < ... < Pinterest
+	if facebookPosPop > pinterestPosPop {
+		t.Error("With SortStrategyPopularity, Facebook should appear before Pinterest")
+	}
+
 	// Test empty SortStrategy (defaults to manual)
 	htmlEmpty := shareLinks.Widget(WidgetOptions{
 		Platforms:    []string{PlatformTwitter, PlatformFacebook},
