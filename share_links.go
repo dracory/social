@@ -1,5 +1,9 @@
 package social
 
+import (
+	"strings"
+)
+
 // ShareLinksParams contains all parameters for generating share links
 type ShareLinksParams struct {
 	URL          string
@@ -48,10 +52,22 @@ func (s *ShareLinks) GetBloggerShareUrl() string {
 	})
 }
 
+func formatTextURL(text, pageURL string) string {
+	text = strings.TrimSpace(text)
+	pageURL = strings.TrimSpace(pageURL)
+	if text == "" {
+		return pageURL
+	}
+	if pageURL == "" {
+		return text
+	}
+	return text + " " + pageURL
+}
+
 // GetBlueskyShareUrl returns the Bluesky share link
 func (s *ShareLinks) GetBlueskyShareUrl() string {
 	return to(SubmitURLBluesky, map[string]string{
-		"text": s.params.Title + " " + s.params.URL,
+		"text": formatTextURL(s.params.Title, s.params.URL),
 	})
 }
 
@@ -78,9 +94,13 @@ func (s *ShareLinks) GetDoubanShareUrl() string {
 
 // GetEmailShareUrl returns the email share link
 func (s *ShareLinks) GetEmailShareUrl() string {
+	body := s.params.Description
+	if body == "" {
+		body = s.params.URL
+	}
 	return to("mailto:"+s.params.EmailAddress, map[string]string{
 		"subject": s.params.Title,
-		"body":    s.params.Description,
+		"body":    body,
 	})
 }
 
@@ -298,7 +318,7 @@ func (s *ShareLinks) GetThreemaShareUrl() string {
 // GetThreadsShareUrl returns the Threads share link
 func (s *ShareLinks) GetThreadsShareUrl() string {
 	return to(SubmitURLThreads, map[string]string{
-		"text": s.params.Title + " " + s.params.URL,
+		"text": formatTextURL(s.params.Title, s.params.URL),
 	})
 }
 
@@ -330,7 +350,7 @@ func (s *ShareLinks) GetTwitterShareUrl() string {
 // GetViberShareUrl returns the Viber share link
 func (s *ShareLinks) GetViberShareUrl() string {
 	return to("viber://forward", map[string]string{
-		"text": s.params.Title + " " + s.params.URL,
+		"text": formatTextURL(s.params.Title, s.params.URL),
 	})
 }
 
@@ -357,7 +377,7 @@ func (s *ShareLinks) GetWeiboShareUrl() string {
 // GetWhatsAppShareUrl returns the WhatsApp share link
 func (s *ShareLinks) GetWhatsAppShareUrl() string {
 	return to(SubmitURLWhatsApp, map[string]string{
-		"text": s.params.Title + " " + s.params.URL,
+		"text": formatTextURL(s.params.Title, s.params.URL),
 	})
 }
 
@@ -373,7 +393,7 @@ func (s *ShareLinks) GetYahooShareUrl() string {
 	return to(SubmitURLYahoo, map[string]string{
 		"to":      s.params.EmailAddress,
 		"subject": s.params.Title,
-		"body":    s.params.Title + " " + s.params.URL,
+		"body":    formatTextURL(s.params.Title, s.params.URL),
 	})
 }
 

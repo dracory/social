@@ -25,7 +25,7 @@ func ValidateURL(input string) bool {
 	if err != nil {
 		return false
 	}
-	return u.Scheme == "http" || u.Scheme == "https"
+	return (u.Scheme == "http" || u.Scheme == "https") && u.Host != ""
 }
 
 // ValidateEmail checks if the given string is a valid email address
@@ -49,8 +49,14 @@ func ValidatePhone(input string) bool {
 	cleaned = strings.ReplaceAll(cleaned, "(", "")
 	cleaned = strings.ReplaceAll(cleaned, ")", "")
 
-	// Must have at least 7 digits and no more than 15 (E.164 standard)
-	if len(cleaned) < 7 || len(cleaned) > 15 {
+	// Count actual digits to comply with E.164 (7 to 15 digits)
+	digitCount := 0
+	for _, ch := range cleaned {
+		if ch >= '0' && ch <= '9' {
+			digitCount++
+		}
+	}
+	if digitCount < 7 || digitCount > 15 {
 		return false
 	}
 

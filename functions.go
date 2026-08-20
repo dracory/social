@@ -57,12 +57,15 @@ func SocialMediaNiceNames() map[string]string {
 		PlatformSkype:           "Skype",
 		PlatformSMS:             "SMS",
 		PlatformSnapchat:        "Snapchat",
+		PlatformTelegram:        "Telegram",
 		PlatformTelegramMe:      "Telegram.me",
+		PlatformTelephone:       "Telephone",
 		PlatformThreema:         "Threema",
 		PlatformThreads:         "Threads",
 		PlatformTikTok:          "TikTok",
 		PlatformTumblr:          "Tumblr",
 		PlatformTwitter:         "Twitter",
+		PlatformViber:           "Viber",
 		PlatformVK:              "VK",
 		PlatformWeibo:           "Weibo",
 		PlatformWhatsApp:        "WhatsApp",
@@ -117,7 +120,10 @@ func SocialMediaSitesByPopularity() []string {
 		PlatformSMS,
 		PlatformLineMe,
 		PlatformSkype,
+		PlatformTelegram,
 		PlatformTelegramMe,
+		PlatformViber,
+		PlatformTelephone,
 	}
 }
 
@@ -152,11 +158,13 @@ func SocialMediaColors() map[string]string {
 		PlatformTikTok:      ColorTikTok,
 		PlatformThreads:     ColorThreads,
 		PlatformTwitter:     ColorTwitter,
+		PlatformViber:       ColorViber,
 		PlatformWhatsApp:    ColorWhatsApp,
 		PlatformYouTube:     ColorYouTube,
 		PlatformEmail:       ColorDefault,
 		PlatformPrint:       ColorDefault,
 		PlatformCopyLink:    ColorDefault,
 		PlatformNativeShare: ColorDefault,
+		PlatformTelephone:   ColorDefault,
 	}
 }

@@ -173,10 +173,20 @@ var platformRegistry = map[string]platformInfo{
 		fontAwesome:   FontAwesomeSnapchat,
 		bootstrapIcon: BootstrapIconSnapchat,
 	},
+	PlatformTelegram: {
+		getURL:        (*ShareLinks).GetTelegramShareUrl,
+		fontAwesome:   FontAwesomeTelegramMe,
+		bootstrapIcon: BootstrapIconTelegramMe,
+	},
 	PlatformTelegramMe: {
 		getURL:        (*ShareLinks).GetTelegramShareUrl,
 		fontAwesome:   FontAwesomeTelegramMe,
 		bootstrapIcon: BootstrapIconTelegramMe,
+	},
+	PlatformTelephone: {
+		getURL:        (*ShareLinks).GetTelephoneShareUrl,
+		fontAwesome:   FontAwesomeTelephone,
+		bootstrapIcon: BootstrapIconTelephone,
 	},
 	PlatformThreema: {
 		getURL:        (*ShareLinks).GetThreemaShareUrl,
@@ -202,6 +212,11 @@ var platformRegistry = map[string]platformInfo{
 		getURL:        (*ShareLinks).GetTwitterShareUrl,
 		fontAwesome:   FontAwesomeTwitter,
 		bootstrapIcon: BootstrapIconTwitter,
+	},
+	PlatformViber: {
+		getURL:        (*ShareLinks).GetViberShareUrl,
+		fontAwesome:   FontAwesomeViber,
+		bootstrapIcon: BootstrapIconViber,
 	},
 	PlatformVK: {
 		getURL:        (*ShareLinks).GetVKShareUrl,
@@ -256,8 +271,8 @@ var popupSize = {width: 780, height: 550};
 function openSharePopup(e) {
 	var link = e.currentTarget;
 	var href = link.getAttribute('href');
-	// Don't use popup for mailto:, sms:, tel:, viber:, skype:, and javascript: links
-	if (href.indexOf('mailto:') === 0 || href.indexOf('sms:') === 0 || href.indexOf('tel:') === 0 || href.indexOf('viber:') === 0 || href.indexOf('skype:') === 0 || href.indexOf('javascript:') === 0) {
+	// Don't use popup for mailto:, sms:, tel:, viber:, skype:, threema:, and javascript: links
+	if (href.indexOf('mailto:') === 0 || href.indexOf('sms:') === 0 || href.indexOf('tel:') === 0 || href.indexOf('viber:') === 0 || href.indexOf('skype:') === 0 || href.indexOf('threema:') === 0 || href.indexOf('javascript:') === 0) {
 		return true;
 	}
 	
